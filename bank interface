@@ -1,0 +1,39 @@
+interface Bank {
+    void deposit(double a);
+    void withdraw(double a);
+    void display();
+}
+
+class Customer {
+    String name;
+    void setName(String n) { name = n; }
+}
+
+class Account {
+    int accNo;
+    double bal;
+    void setAcc(int a, double b) { accNo = a; bal = b; }
+}
+
+class Transaction extends Customer implements Bank {
+    Account acc = new Account();
+
+    public void deposit(double a) { acc.bal += a; }
+    public void withdraw(double a) {
+        if (a <= acc.bal) acc.bal -= a;
+    }
+    public void display() {
+        System.out.println(name + " " + acc.accNo + " " + acc.bal);
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Transaction t = new Transaction();
+        t.setName("Ankita");
+        t.acc.setAcc(123, 1000);
+        t.deposit(500);
+        t.withdraw(200);
+        t.display();
+    }
+}
